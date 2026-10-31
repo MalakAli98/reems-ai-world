@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REEM'S AI WORLD — The Crystal Quest</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700;800&family=Nunito:wght@400;700;900&display=swap');
+:root{--ink:#172052;--deep:#0c1238;--pink:#ff8bc8;--gold:#ffe18b;--ice:#9cecff;--mint:#8cf0d5}
+*{box-sizing:border-box}body{margin:0;color:#fff;font-family:'Nunito',Arial,sans-serif;background:#0a1034;min-height:100vh;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 15%,#4e58a655,transparent 25%),radial-gradient(circle at 85% 30%,#a94f9b44,transparent 25%),linear-gradient(145deg,#111a4a,#090e2c 75%);z-index:-2}
+header{max-width:1280px;margin:auto;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{font:800 clamp(22px,4vw,34px) 'Baloo 2';letter-spacing:1px;text-shadow:0 3px #5e4caa,0 0 20px #79cfff}.logo small{display:block;font:700 10px 'Nunito';letter-spacing:4px;color:#b7d9ff}
+.hud{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.chip{background:#ffffff14;border:1px solid #ffffff35;border-radius:30px;padding:9px 14px;font-weight:900;box-shadow:inset 0 1px #ffffff22}
+button{font:900 15px 'Nunito';border:0;border-radius:15px;padding:12px 17px;color:#17204f;background:linear-gradient(135deg,#fff1a9,#ff9ccf);box-shadow:0 5px 0 #9b548f;cursor:pointer;transition:.18s}
+button:hover{transform:translateY(-3px);filter:brightness(1.08)}button:active{transform:translateY(3px);box-shadow:none}
+button.ghost{background:#ffffff17;color:white;border:1px solid #ffffff4d;box-shadow:none}
+main{max-width:1280px;margin:auto;padding:0 22px 25px}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;gap:18px;align-items:stretch}
+.intro{padding:clamp(22px,4vw,42px);border-radius:28px;background:linear-gradient(135deg,#283a7b,#5a438d 65%,#9b5b94);border:1px solid #ffffff4d;box-shadow:0 22px 55px #0005;position:relative;overflow:hidden}
+.kicker{font-weight:900;color:#ffe5a0;letter-spacing:3px;font-size:12px}.intro h1{font:800 clamp(38px,6vw,70px)/.98 'Baloo 2';margin:12px 0;text-shadow:0 5px #493a82}.intro h1 span{color:#ffb3dc}.intro p{font-size:17px;line-height:1.6;color:#edf1ff;max-width:650px}.namebox{margin-top:18px;max-width:470px;background:#ffffff16;border:1px solid #ffffff45;border-radius:17px;padding:12px 14px;backdrop-filter:blur(8px)}
+.namebox label{display:block;font-size:11px;letter-spacing:2px;font-weight:900;color:#ffe7a7;margin-bottom:7px}
+.nameentry{display:flex;gap:8px;flex-wrap:wrap}.nameentry input{flex:1;min-width:170px;border:2px solid #ffffff88;border-radius:12px;padding:11px 13px;font:800 14px 'Nunito';color:#172052;background:#fff;outline:none}.nameentry input:focus{border-color:#ffe18b;box-shadow:0 0 0 3px #ffe18b44}.nameentry button{padding:10px 13px;font-size:12px}
+.namebox small{display:block;color:#e5eaff;margin-top:7px;font-size:11px}
+.startrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+.trophy{position:absolute;right:30px;bottom:-30px;font-size:150px;opacity:.14;transform:rotate(-12deg)}
+.preview{min-height:310px;border-radius:28px;position:relative;overflow:hidden;border:1px solid #a8caff88;background:linear-gradient(#65c7f2 0%,#d7f3ff 53%,#70d4b2 54%,#287f83 100%);box-shadow:0 22px 55px #0005;perspective:1000px;isolation:isolate}
+.preview:before{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 25%,#ffffff30 48%,transparent 66%);transform:translateX(-100%);animation:shine 7s ease-in-out infinite;z-index:5;pointer-events:none}
+.preview:after{content:"";position:absolute;left:-10%;right:-10%;bottom:-52px;height:130px;background:radial-gradient(ellipse,#1c607b88,transparent 68%);z-index:1}
+@keyframes shine{0%,55%{transform:translateX(-110%)}85%,100%{transform:translateX(110%)}}
+.sun{position:absolute;right:13%;top:12%;width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff9c8,#ffcf65 65%,#f59a71);box-shadow:0 0 55px #ffe6a1}
+.cloud{position:absolute;width:110px;height:28px;background:#ffffffc9;border-radius:50px;filter:drop-shadow(0 7px 5px #5b8bb544);animation:cloud 15s linear infinite}.cloud:before,.cloud:after{content:"";position:absolute;background:inherit;border-radius:50%;width:48px;height:42px;left:18px;top:-18px}.cloud:after{left:52px;top:-12px;width:42px;height:34px}@keyframes cloud{from{transform:translateX(-150px)}to{transform:translateX(550px)}}
+.island{position:absolute;left:50%;top:49%;width:270px;height:150px;transform:translate(-50%,-20%);transform-style:flat;animation:islandFloat 5s ease-in-out infinite;z-index:2}
+@keyframes islandFloat{0%,100%{translate:0 0}50%{translate:0 -10px}}
+.topis{position:absolute;inset:0;border-radius:45%;background:linear-gradient(135deg,#a1ffdb 0%,#52d6b2 38%,#26958e 78%,#176d79);box-shadow:inset -15px -15px 0 #237d79,0 25px 0 #8156a2,0 42px 25px #18345b88}
+.topis:before{content:"";position:absolute;left:12%;top:12%;width:38%;height:24%;border-radius:50%;background:#ffffff35;filter:blur(7px)}
+.topis:after{content:"";position:absolute;inset:15px;border:2px solid #d2ffe877;border-radius:45%}
+.tree{position:absolute;z-index:2;bottom:90px;font-size:54px;filter:drop-shadow(0 8px 4px #204a4488);transform:rotateZ(0deg);transform-origin:bottom center;animation:treeSway 3.8s ease-in-out infinite}
+@keyframes treeSway{0%,100%{transform:rotate(0deg)}50%{transform:rotate(2deg)}}.tree.t1{left:17%}.tree.t2{right:15%;bottom:80px}
+.castle{position:absolute;z-index:2;left:50%;bottom:88px;transform:translateX(-50%);font-size:72px;filter:drop-shadow(0 10px 7px #25416a99)}
+.gate{position:absolute;z-index:3;left:50%;top:35%;transform:translate(-50%,-50%);font-size:64px;filter:drop-shadow(0 0 20px #fff3a4);animation:float 2s ease-in-out infinite}@keyframes float{50%{transform:translate(-50%,-62%)}}
+.avatar{position:absolute;z-index:4;left:32%;top:34%;font-size:61px;filter:drop-shadow(0 10px 7px #24466a99);animation:heroHover 2.8s ease-in-out infinite;transform-origin:50% 85%}
+@keyframes heroHover{0%,100%{transform:translateY(0) scale(1)}35%{transform:translateY(-13px) scale(1.04)}65%{transform:translateY(-5px) scale(1.01)}}
+.bot{position:absolute;right:8%;bottom:11%;font-size:76px;filter:drop-shadow(0 12px 6px #25416a88);animation:robotHover 2.1s ease-in-out infinite;transform-origin:center}
+@keyframes robotHover{0%,100%{transform:translateY(0) rotate(5deg)}50%{transform:translateY(-17px) rotate(-7deg) scale(1.06)}}
+.stars{position:absolute;inset:0;font-size:24px;color:#fff7ad;text-shadow:0 0 12px #fff;animation:twinkle 2s infinite alternate}.stars span{position:absolute}.stars span:nth-child(1){left:13%;top:20%}.stars span:nth-child(2){left:77%;top:29%}.stars span:nth-child(3){left:48%;top:12%}.stars span:nth-child(4){left:24%;top:65%}@keyframes twinkle{to{opacity:.4;transform:scale(.95)}}
+.section{margin-top:18px;background:#ffffff0d;border:1px solid #ffffff25;border-radius:24px;padding:20px;box-shadow:0 12px 35px #0003}
+.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.section h2{font:800 24px 'Baloo 2';margin:0;color:#ffe4a0}
+.worlds{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:15px}
+.world{min-height:180px;position:relative;overflow:hidden;border-radius:20px;padding:17px;border:1px solid #ffffff55;box-shadow:inset 0 0 45px #ffffff15,0 10px 22px #0003;transition:.2s}
+.world:hover{transform:translateY(-5px)}.world:nth-child(1){background:linear-gradient(145deg,#178e9d,#1d557e)}.world:nth-child(2){background:linear-gradient(145deg,#6352b7,#262c79)}.world:nth-child(3){background:linear-gradient(145deg,#bd6b9c,#5c3b8b)}
+.world .emoji{font-size:46px;filter:drop-shadow(0 7px 5px #0004)}.world h3{margin:5px 0;font:800 22px 'Baloo 2'}.world p{margin:0 0 13px;color:#e7eaff;font-size:13px}.world button{font-size:13px;padding:9px 13px}.lock{position:absolute;right:16px;top:15px;font-size:23px}
+.gamegrid{display:grid;grid-template-columns:1fr 320px;gap:15px;margin-top:18px}
+.playfield{border-radius:23px;min-height:330px;position:relative;overflow:hidden;background:linear-gradient(#83d5f2,#d4f0ff 55%,#62c6a4 56%,#348d81);border:1px solid #ffffff66;box-shadow:inset 0 -20px 45px #174a5a66}
+.playfield:before{content:"";position:absolute;width:230px;height:70px;left:50%;top:46%;transform:translate(-50%,-50%);border-radius:45%;background:linear-gradient(135deg,#7bf0c2,#279a91);box-shadow:0 25px #7753a2,0 40px 20px #16365c88}
+.playfield:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 22%,#fff7b455,transparent 20%),linear-gradient(transparent 55%,#173c3d22);pointer-events:none}
+.playchar{position:absolute;z-index:2;left:37%;top:43%;font-size:64px;filter:drop-shadow(0 8px 4px #16445c88);animation:float 2s infinite}.playbot{position:absolute;z-index:2;right:20%;top:48%;font-size:60px;animation:float 2.2s infinite}
+.portal{position:absolute;z-index:2;left:60%;top:29%;font-size:68px;filter:drop-shadow(0 0 18px #fff5a0);animation:float 1.8s infinite}
+.side{background:linear-gradient(145deg,#293a7a,#141d50);border:1px solid #ffffff35;border-radius:22px;padding:18px}
+.side h3{color:#ffe3a0;margin:0 0 8px}.side p{color:#e7edff;line-height:1.5;font-size:14px}
+.robotline{display:flex;gap:12px;align-items:center}.robotline b{color:#9eefff}.robotline .r{font-size:55px}
+.progress{height:9px;background:#ffffff20;border-radius:20px;overflow:hidden;margin:14px 0}.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#8bf0d5,#ffe18b);transition:.4s}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.controls button{padding:9px 12px;font-size:13px}
+.modal{display:none;position:fixed;inset:0;background:#050a24dd;z-index:10;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.dialog{width:min(570px,100%);background:linear-gradient(145deg,#34498e,#171f57);border:1px solid #c3d2ff77;border-radius:26px;padding:25px;box-shadow:0 25px 90px #000b}.dialog h2{font:800 27px 'Baloo 2';color:#ffe3a0;margin:0 0 10px}.dialog p{line-height:1.5;color:#edf1ff}.answers{display:grid;gap:9px}.answers button{text-align:left;background:#f4f6ff;color:#18204f;box-shadow:0 4px #a9b6e3}.feedback{min-height:28px;color:#ffe18b;font-weight:900;margin:13px 0}
+footer{text-align:center;color:#ff9fd0;font-weight:900;letter-spacing:1px;padding:23px 0 8px}
+.hidden{display:none!important}
+@media(max-width:850px){.hero{grid-template-columns:1fr}.preview{min-height:260px}.gamegrid{grid-template-columns:1fr}.worlds{grid-template-columns:1fr}.world{min-height:145px}}
+</style>
+</head>
+<body>
+<header><div class="logo">REEM'S AI WORLD<small>THE CRYSTAL QUEST · ENGLISH 6A</small></div><div class="hud"><div class="chip">⭐ <span id="score">0</span></div><div class="chip">💎 <span id="gems">0</span>/3</div><button class="ghost" id="soundBtn" onclick="toggleSound()">🔊 SOUND ON</button></div></header>
+<main>
+<section class="hero" id="landing">
+<div class="intro"><div class="kicker">A MAGICAL 3D CARTOON ADVENTURE</div><h1>LEARN.<br><span>PLAY.</span> SAVE<br>THE WORLD!</h1><p>The Crystal of Knowledge has shattered into three magical pieces. Join Reem and Nova on an epic English adventure through Fun Island, Tech City and Story Kingdom!</p><div class="namebox"><label for="playerName">✨ PLAYER NAME</label><div class="nameentry"><input id="playerName" maxlength="22" placeholder="Type your name here..." autocomplete="given-name"><button onclick="savePlayerName()">SAVE NAME</button></div><small id="nameMessage">Nova will welcome you by name!</small></div><div class="startrow"><button onclick="begin()">▶ START YOUR QUEST</button><button class="ghost" onclick="speak('Welcome to Reems AI World. Are you ready for an amazing English adventure?')">🔈 Meet Nova</button></div><div class="trophy">🏆</div></div>
+<div class="preview"><div class="sun"></div><div class="cloud" style="top:22%;left:-5%"></div><div class="cloud" style="top:36%;left:60%;animation-delay:-7s"></div><div class="island"><div class="topis"></div><div class="tree t1">🌴</div><div class="tree t2">🌳</div><div class="castle">🏰</div><div class="gate">🌀</div><div class="avatar">🧝🏻‍♀️</div></div><div class="bot">🤖</div><div class="stars"><span>✦</span><span>✧</span><span>✦</span><span>✧</span></div></div>
+</section>
+<section class="section" id="map"><div class="sectionhead"><h2>🗺️ CHOOSE YOUR WORLD</h2><span class="chip">3 WORLDS · 12 CHALLENGES</span></div><div class="worlds">
+<div class="world"><div class="emoji">🏝️⚽</div><h3>FUN ISLAND</h3><p>Hobbies · Sports · Present tenses</p><button onclick="enterWorld(0)">ENTER WORLD →</button></div>
+<div class="world"><span class="lock" id="lock1">🔒</span><div class="emoji">🤖💻</div><h3>TECH CITY</h3><p>Technology · Devices · Comparatives</p><button id="world1" onclick="enterWorld(1)" disabled>UNLOCK AFTER WORLD 1</button></div>
+<div class="world"><span class="lock" id="lock2">🔒</span><div class="emoji">🏰📖</div><h3>STORY KINGDOM</h3><p>Places · Relative pronouns · Past continuous</p><button id="world2" onclick="enterWorld(2)" disabled>UNLOCK AFTER WORLD 2</button></div>
+</div></section>
+<section class="gamegrid hidden" id="game">
+<div class="playfield"><div class="portal">🌀</div><div class="playchar">🧝🏻‍♀️</div><div class="playbot">🤖</div></div>
+<aside class="side"><div class="robotline"><div class="r">🤖</div><div><b>NOVA</b><div style="font-size:12px;color:#dceaff">Your AI English buddy</div></div></div><p id="story">Welcome, Reem! Your adventure begins now.</p><div class="progress"><span id="bar"></span></div><p><b id="stageName">WORLD 1</b> · Challenge <span id="number">1</span>/4</p><div class="controls"><button onclick="hint()">✨ HINT</button><button class="ghost" onclick="speakNova()">🔈 NOVA SPEAKS</button><button class="ghost" onclick="backToMap()">🗺️ MAP</button></div></aside>
+</section>
+<section class="section hidden" id="victory" style="text-align:center"><div style="font-size:68px">🏆💎✨</div><h2 style="color:#ffe18b;font:800 34px 'Baloo 2'">YOU SAVED THE ENGLISH WORLD!</h2><p id="finalText">You are the English World Champion!</p><button onclick="resetGame()">PLAY AGAIN</button></section>
+<footer>Done By Reem AlAbri · GRADE 6A</footer>
+</main>
+<div class="modal" id="quiz"><div class="dialog"><div class="kicker">NOVA'S CHALLENGE</div><h2 id="qTitle">FUN ISLAND</h2><p id="qText"></p><div class="answers" id="answers"></div><div class="feedback" id="feedback"></div><button id="next" class="hidden" onclick="nextQuestion()">CONTINUE →</button></div></div>
+<script>
+const data=[
+{title:'FUN ISLAND',story:'The island games have stopped! Help Nova restart the fun by showing your knowledge of hobbies, sports and present tenses.',qs:[
+['I ___ swimming every Friday.',['go','goes','am go'],0,'With I, use the base verb: I go.'],
+['Look! The children ___ football now.',['play','are playing','plays'],1,'Look! tells us it is happening now: are + verb-ing.'],
+['Which activity is a hobby?',['doing puzzles','hospital','password'],0,'A hobby is something you enjoy doing in your free time.'],
+['She ___ like playing hockey.',['don’t','doesn’t','isn’t'],1,'With she, use doesn’t + the base verb.']]},
+{title:'TECH CITY',story:'The power in Tech City is gone! Repair the computer tower with your English skills about technology and the past.',qs:[
+['You use a ___ to type on a computer.',['keyboard','stadium','swimming pool'],0,'A keyboard helps you type letters and words.'],
+['We ___ use computers when Grandpa was young.',['couldn’t','can’t','don’t'],0,'Could and couldn’t describe ability in the past.'],
+['I ___ upload the photo yesterday.',['had to','have to','has to'],0,'Had to describes an obligation in the past.'],
+['Choose the comparative adverb.',['She runs quickly.','He types more carefully than me.','I download an app.'],1,'More carefully than compares the way two actions are done.']]},
+{title:'STORY KINGDOM',story:'The young inventor is lost in the kingdom! Use places, relative pronouns and past continuous to guide the inventor home.',qs:[
+['A hospital is a place ___ doctors work.',['who','where','when'],1,'Use where for a place.'],
+['The teacher ___ helped me is kind.',['who','where','when'],0,'Use who for a person.'],
+['She ___ reading when the phone rang.',['was','were','is'],0,'Past continuous: was or were + verb-ing.'],
+['Choose the correct direction.',['Go straight on.','Going straight.','Goes straight.'],0,'Use the base verb to give an instruction.']]}
+];
+let score=0,gems=0,world=0,q=0,correct=false,sound=true,audio=null,playerName='Reem';
+function savePlayerName(){const field=document.getElementById('playerName');const entered=field.value.trim();if(entered){playerName=entered.slice(0,22);document.getElementById('nameMessage').textContent='✨ Great, '+playerName+'! Nova is ready for you.';speak('Hello '+playerName+'! Welcome to your adventure.');tone(740)}else{document.getElementById('nameMessage').textContent='Please type your name first.';field.focus()}}
+document.getElementById('playerName').addEventListener('keydown',e=>{if(e.key==='Enter')savePlayerName()});
+function tone(f,d=.14,type='sine',delay=0){if(!sound)return;try{audio=audio||new(window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();let o=audio.createOscillator(),g=audio.createGain();o.type=type;o.frequency.value=f;g.gain.setValueAtTime(.0001,audio.currentTime+delay);g.gain.exponentialRampToValueAtTime(.06,audio.currentTime+delay+.02);g.gain.exponentialRampToValueAtTime(.0001,audio.currentTime+delay+d);o.connect(g);g.connect(audio.destination);o.start(audio.currentTime+delay);o.stop(audio.currentTime+delay+d+.02)}catch(e){}}
+function fx(kind){if(!sound)return;if(kind==='win'){[523,659,784,1047].forEach((f,i)=>tone(f,.23,'sine',i*.12))}else if(kind==='yes'){[660,830,990].forEach((f,i)=>tone(f,.16,'sine',i*.09))}else tone(190,.25,'triangle')}
+function toggleSound(){sound=!sound;document.getElementById('soundBtn').textContent=sound?'🔊 SOUND ON':'🔇 SOUND OFF';if(sound)tone(660)}
+function speak(t){if(!('speechSynthesis'in window))return;let u=new SpeechSynthesisUtterance(t);u.lang='en-US';u.rate=.9;u.pitch=1.1;speechSynthesis.cancel();speechSynthesis.speak(u)}
+function speakNova(){speak('Hello Reem! '+data[world].story)}
+function begin(){const entered=document.getElementById('playerName').value.trim();if(entered)playerName=entered.slice(0,22);document.getElementById('map').scrollIntoView({behavior:'smooth'});speak('Welcome '+playerName+'. Choose your first magical world!')}
+function enterWorld(w){if(w>gems)return;world=w;q=0;document.getElementById('game').classList.remove('hidden');document.getElementById('victory').classList.add('hidden');document.getElementById('stageName').textContent=data[w].title;document.getElementById('story').textContent=data[w].story;document.getElementById('number').textContent=1;document.getElementById('game').scrollIntoView({behavior:'smooth'});showQuestion();tone(500);speak(data[w].title+'. '+data[w].story)}
+function showQuestion(){correct=false;let a=data[world].qs[q];document.getElementById('qTitle').textContent=data[world].title+' · CHALLENGE '+(q+1);document.getElementById('qText').textContent=a[0];let box=document.getElementById('answers');box.innerHTML='';a[1].forEach((v,i)=>{let b=document.createElement('button');b.textContent=String.fromCharCode(65+i)+'. '+v;b.onclick=()=>answer(i);box.appendChild(b)});document.getElementById('feedback').textContent='Choose the best answer to power up the crystal!';document.getElementById('next').classList.add('hidden');document.getElementById('quiz').classList.add('show')}
+function answer(i){if(correct)return;correct=true;let a=data[world].qs[q],right=i===a[2];if(right){score+=10;document.getElementById('feedback').textContent='✨ Brilliant! +10 points. '+a[3];fx('yes')}else{document.getElementById('feedback').textContent='Good try! Correct answer: '+a[1][a[2]]+'. '+a[3];fx('no')}document.getElementById('score').textContent=score;document.getElementById('answers').querySelectorAll('button').forEach(b=>b.disabled=true);document.getElementById('next').classList.remove('hidden');speak(right?'Excellent! '+a[3]:'The correct answer is '+a[1][a[2]]+'. '+a[3])}
+function nextQuestion(){document.getElementById('quiz').classList.remove('show');if(q<3){q++;document.getElementById('number').textContent=q+1;showQuestion();return}gems++;document.getElementById('gems').textContent=gems;fx('win');document.getElementById('game').classList.add('hidden');if(gems<3){let id='world'+gems;document.getElementById(id).disabled=false;document.getElementById(id).textContent='ENTER WORLD →';document.getElementById('lock'+gems).textContent='🔓';document.getElementById('story').textContent='Crystal restored! Choose your next world.';document.getElementById('map').scrollIntoView({behavior:'smooth'});speak('Amazing! You found a crystal. Your next world is unlocked!')}else{document.getElementById('victory').classList.remove('hidden');document.getElementById('finalText').textContent=playerName+', you collected all three crystals and earned '+score+' out of 120 points. You are the English World Champion!';document.getElementById('victory').scrollIntoView({behavior:'smooth'});speak('Congratulations '+playerName+'! You saved the English World!')}}
+function hint(){let a=data[world].qs[q];document.getElementById('story').textContent='Nova hint: '+a[3];speak('Here is a hint. '+a[3])}
+function backToMap(){document.getElementById('game').classList.add('hidden');document.getElementById('map').scrollIntoView({behavior:'smooth'})}
+function resetGame(){score=0;gems=0;world=0;q=0;document.getElementById('score').textContent='0';document.getElementById('gems').textContent='0';document.getElementById('world1').disabled=true;document.getElementById('world1').textContent='UNLOCK AFTER WORLD 1';document.getElementById('world2').disabled=true;document.getElementById('world2').textContent='UNLOCK AFTER WORLD 2';document.getElementById('lock1').textContent='🔒';document.getElementById('lock2').textContent='🔒';document.getElementById('victory').classList.add('hidden');document.getElementById('map').scrollIntoView({behavior:'smooth'})}
+</script>
+</body></html>
